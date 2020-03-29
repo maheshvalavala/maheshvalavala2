@@ -1,0 +1,50 @@
+// A C program to create (or insert) and inorder traversal on Binary Search Tree.  
+
+
+#include<stdio.h> 
+#include<stdlib.h> 
+struct node 
+{ 
+    int text; 
+    struct node *left, *right; 
+}; 
+struct node *newNode(int key) 
+{ 
+    struct node *temp1 =  (struct node *)malloc(sizeof(struct node)); 
+    temp1->text = key; 
+    temp1->left = temp1->right = NULL; 
+    return temp1; 
+} 
+void inorder(struct node *data) 
+{ 
+    if (data != NULL) 
+    { 
+    inorder(data->left); 
+    printf("%d \n", data->text); 
+    inorder(data->right); 
+    } 
+} 
+struct node* insert(struct node* node, int text) 
+{ 
+    if (node == NULL) return newNode(text); 
+    if (text < node->text) 
+    node->left  = insert(node->left, text); 
+    else if (text > node->text) 
+    node->right = insert(node->right, text);    
+    return node; 
+} 
+
+int main() 
+{
+    struct node *data = NULL; 
+    data = insert(root, 3); 
+    insert(data, 43); 
+    insert(data, 5); 
+    insert(data, 98); 
+    insert(data, 51); 
+    insert(data, 12); 
+    insert(data, 37); 
+   
+    inorder(data); 
+    return 0; 
+}
